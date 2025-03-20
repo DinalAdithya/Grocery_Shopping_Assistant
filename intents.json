@@ -1,0 +1,128 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "Hello",
+        "Good morning",
+        "Good afternoon",
+        "Is anyone there?"
+      ],
+      "responses": [
+        "Hello! Welcome to our grocery assistant.",
+        "Hi there! How can I help you with your shopping today?",
+        "Hey! Looking for groceries? I can assist you."
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye", "Thanks, bye"],
+      "responses": [
+        "Goodbye! Have a great day!",
+        "See you next time! Happy shopping.",
+        "Bye! Come back when you need more groceries."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That was helpful", "Thanks a lot!"],
+      "responses": [
+        "You're welcome! Let me know if you need more help.",
+        "Anytime! Happy to assist you with shopping.",
+        "Glad to help! Have a great day."
+      ]
+    },
+    {
+      "tag": "products",
+      "patterns": [
+        "What do you sell?",
+        "What items do you have?",
+        "What groceries do you offer?",
+        "Do you have fresh vegetables?",
+        "Do you sell dairy products?",
+        "what kind of product do you have?"
+      ],
+      "responses": [
+        "We have fresh fruits, vegetables, dairy, bakery items, meats, and packaged goods. Let me know what you need!",
+        "Our grocery store offers fresh produce, beverages, dairy products, and household essentials.",
+        "Yes! We have a wide variety of groceries, including organic and fresh items."
+      ]
+    },
+    {
+      "tag": "order",
+      "patterns": [
+        "I want to place an order",
+        "Can I order groceries?",
+        "How do I buy groceries?",
+        "I need to place an order",
+        "Can I add items to my cart?",
+        "I need to order some food",
+        "How do I purchase items?",
+        "Where can I place an order?",
+        "Order groceries for me",
+        "Help me place an order"
+      ],
+      "responses": [
+        "Sure! What items would you like to add to your cart?",
+        "Absolutely! Tell me what groceries you need, and I'll add them to your order.",
+        "Got it! Let me know the items you want to purchase."
+      ]
+    },
+    {
+      "tag": "payments",
+      "patterns": [
+        "Do you take credit cards?",
+        "Do you accept Mastercard?",
+        "Can I pay with PayPal?",
+        "Do you accept cash only?",
+        "what are the payment methods available"
+      ],
+      "responses": [
+        "We accept cash, VISA, Mastercard, and PayPal.",
+        "You can pay with cash, card, or mobile payments like PayPal."
+      ]
+    },
+    {
+      "tag": "delivery",
+      "patterns": [
+        "Do you do delivery?",
+        "How long does delivery take?",
+        "Can I get my groceries delivered?",
+        "Is there home delivery?"
+      ],
+      "responses": [
+        "Yes, we offer grocery delivery! It usually takes 30-60 minutes.",
+        "We deliver within an hour in most areas. Let me know your location for details."
+      ]
+    },
+    {
+      "tag": "recipe",
+      "patterns": [
+        "Can you suggest a recipe?",
+        "What can I cook with eggs and cheese?",
+        "Give me a recipe with tomatoes and onions",
+        "Suggest me some recipes"
+      ],
+      "responses": [
+        "Sure! Tell me the ingredients you have, and I'll find a recipe for you.",
+        "I can recommend recipes based on what you have! What ingredients do you want to use?",
+        "Let me check! What items do you have in your kitchen?"
+      ]
+    },
+    {
+      "tag": "funny",
+      "patterns": [
+        "Tell me a joke!",
+        "Tell me something funny!",
+        "Do you know a joke?"
+      ],
+      "responses": [
+        "Why did the tomato turn red? Because it saw the salad dressing!",
+        "Why do bananas never feel lonely? Because they hang out in bunches!",
+        "What’s a grocery store’s favorite type of music? Pop!"
+      ]
+    }
+  ]
+}

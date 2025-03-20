@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+</head>
+<body>
+<div class="container">
+    <div class="chatbox">
+        <div class="chatbox__support">
+            <div class="chatbox__header">
+                <div class="chatbox__image--header">
+                    <img src="data:image/png;base64,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">
+                </div>
+                <div class="chatbox__content--header">
+                    <h4 class="chatbox__heading--header">Chat support</h4>
+                    <p class="chatbox__description--header">Hi. My name is Tara. How can I help you?</p>
+                </div>
+            </div>
+            <div class="chatbox__messages">
+                <div></div>
+            </div>
+            <div class="chatbox__footer">
+                <input type="text" placeholder="Write a message...">
+                <button class="chatbox__send--footer send__button">Send</button>
+            </div>
+        </div>
+        <div class="chatbox__button">
+            <button><img src="{{ url_for('static', filename='images/chatbox-icon.svg') }}" /></button>
+        </div>
+    </div>
+</div>
+
+    <script>
+        $SCRIPT_ROOT = {{ request.script_root|tojson }};
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>
