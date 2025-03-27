@@ -6,6 +6,8 @@ from model import NeuralNet
 from my_nltk import bag_of_words, tokenize
 from recipes_model import df
 
+print(df.columns.tolist())
+
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 with open('intents.json', 'r') as json_data:
@@ -79,21 +81,75 @@ def recommend_recipe(user_ingredients):
 
     # print("Available columns in DataFrame:", df.columns)
 
-    recommended_recipes = df.iloc[indices[0]]['name_tokens'].apply(lambda x: ' '.join(map(str, eval(x)))).tolist()
+    recommended_recipes = df.iloc[indices[0]]['Title'].tolist()
 
     print(f"recommended_recipes : {recommended_recipes}")  # debug code
 
     return recommended_recipes
 
 
+
+
+
+conversation_context = {
+        "last_selected_recipe": None
+    }
+
 # Example chatbot function using the model
 def get_recipe_recommendation(user_input):
+
     user_input = user_input.lower()
+
+    # Normalize recipe titles for easier matching
+    recipe_titles = [title.lower() for title in df['Title'].tolist()]
+
+    # if user ask for recipe explicitly
     if "suggest a recipe" in user_input or "recipe" in user_input:
         ingredients = user_input.replace("suggest a recipe with ", "").split(", ")
-        return f"Here are some recipe ideas: {recommend_recipe(ingredients)}"
+        recommended = recommend_recipe(ingredients)
+        if recommended:
+            # save the first suggestion
+            conversation_context["last_selected_recipe"] = recommended[0]
+            return f"Here are some recipe ideas: {recommended}"
+        else:
+            return f"Sorry I couldn't find my recipes with those ingredients."
 
-    # otherwise use intent base chatbot
+    # if user input is a list of ingredients
+    if "," in user_input or user_input in ['egg', 'milk', 'butter']:
+        ingredients = [item.strip() for item in user_input.split(",") if item.strip()]
+        recommended = recommend_recipe(ingredients)
+        if recommended:
+            # save the first suggestion
+            conversation_context["last_selected_recipe"] = recommended[0]
+            return f"Here are some recipe ideas: {recommended}"
+        else:
+            return f"Sorry I couldn't find my recipes with those ingredients."
+
+    # If user in put matches recipe name(token)
+    if user_input in recipe_titles:
+        conversation_context["last_selected_recipe"] = user_input
+        return f"Great choice! Would you like the full recipe for '{user_input.title()}'?"
+
+    # if user said yes and recipe was selected earlier
+    if user_input in ["yes", " yeah", "sure", "yup"]:
+        recipe = conversation_context.get("last_selected_recipe")
+        if recipe:
+            recipe_details = df[df['Title'].str.lower() == recipe.lower()]
+
+            if not recipe_details.empty:
+                ingredients = recipe_details.iloc[0]['Cleaned_Ingredients']
+                instructions = recipe_details.iloc[0]['Instructions']
+                return (
+                    f"Here's the full recipe for **{recipe.title()}**:\n\n"
+                    f"**Ingredients:**\n{ingredients}\n\n"
+                    f"**Instructions:**\n{instructions}"
+                )
+            else:
+                return "Sorry, I culdn't find that recipe"
+        else:
+            return "I'm not sure witch recipe u ment. can u repeat the name?"
+
+    # otherwise use intent base chatbot -> "I dont Understand"
     return get_chat_response(user_input)
 
 

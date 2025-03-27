@@ -6,19 +6,24 @@ from sklearn.neighbors import NearestNeighbors
 
 df = pd.read_csv("PP_recipes.csv")# load data set
 
-df = df[['id', 'name_tokens', 'ingredient_tokens']]
+"""
+print(df.head())
+print(df.columns)
+"""
+
+df = df[['Id', 'Title', 'Instructions', 'Cleaned_Ingredients']]
 # to keep usefull cloumns and drop others
 df.dropna(inplace=True)
 
 # to convert ingredient_tokens list into actual lists
-df['ingredient_tokens'] = df['ingredient_tokens'].apply(ast.literal_eval)
+df['Cleaned_Ingredients'] = df['Cleaned_Ingredients'].apply(ast.literal_eval)
 
 # to convert ingredient_tokens list to text format
-df['ingredient_tokens'] = df['ingredient_tokens'].apply(lambda x: ' '.join(map(str, x)))
+df['Cleaned_Ingredients'] = df['Cleaned_Ingredients'].apply(lambda x: ' '.join(map(str, x)))
 
 #convert ingredient_tokens into numerical format
 vectorizer = CountVectorizer()
-X = vectorizer.fit_transform(df['ingredient_tokens'])
+X = vectorizer.fit_transform(df['Cleaned_Ingredients'])
 
 # Train recipe recommendation model
 model = NearestNeighbors(n_neighbors=3, metric="cosine")
